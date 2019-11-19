@@ -53,10 +53,10 @@ int print_machine_type(int machine){
 		printf("AArch64\n");
 		break;
 	case 0xF3:
-		printf("RISC-V");
+		printf("RISC-V\n");
 		break;
 	default:
-		printf("Unknown/Unsupported!!");
+		printf("Unknown/Unsupported!!\n");
 		break;
 
 	}
@@ -118,11 +118,20 @@ int parse_file(char **argv){
 		return -EAGAIN;
 	}
 	elf_header_t local_elf_header;
-	if(fread((char *)&local_elf_header, 16, 1 ,file)){
+	if(!fread(&local_elf_header, 24, 1 ,file)){
 		printf("unable to read header\n, try again");
+		fclose(file);
 		return -EAGAIN;
 	}
+#ifdef DEBUG
+	printf("header elf?%c %c %c %c\n",local_elf_header.e_ident[0],
+			local_elf_header.e_ident[1],
+			local_elf_header.e_ident[2],
+			local_elf_header.e_ident[3]);
 /*Check endianness to understand how to read data from header!!*/
+//	elf_header_t local_elf_header = (elf_header_t)*_local_elf_header;
+	printf("endianness:%d\n",local_elf_header.endian);
+#endif
 	switch(local_elf_header.endian){
 	case ELFDATA2LSB:
 		get_byte_data = get_little_endian;
@@ -131,13 +140,17 @@ int parse_file(char **argv){
 		get_byte_data = get_big_endian;
 		break;
 	default:
-		printf("Unable to read endianness\n");
+		printf("Unable to read endianness:%d\n",local_elf_header.endian);
 	}
 	/*
 	 *Extract machine Architecture
 	 */
-
+#ifdef DEBUG
+	printf("machine?0x%x0x%x\n",local_elf_header.e_machine[0],
+			local_elf_header.e_machine[1]);
+#endif
 	unsigned short machine = get_byte_data(local_elf_header.e_machine,2);
+	printf("machine?%x\n",machine);
 	if(archFlag){
 		print_machine_type(machine);
 	}
