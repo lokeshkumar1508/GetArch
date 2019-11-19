@@ -1,0 +1,10 @@
+packages used for test:
+https://packages.debian.org/stretch/libacl1
+https://packages.debian.org/stretch/libc6
+https://rpmfind.net/linux/rpm2html/search.php?query=libacl.so.1()(64bit)
+
+
+References:
+https://en.wikipedia.org/wiki/Executable_and_Linkable_Format
+https://docs.oracle.com/cd/E19957-01/806-0641/chapter6-35342/index.html
+
