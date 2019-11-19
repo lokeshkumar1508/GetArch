@@ -3,7 +3,7 @@ CFLAGS += -DDEBUG -g
 endif
 CC := gcc
 DIR := ./
-objs := parse.o read_lib.o file_names.o
+objs := parse.o main.o file_names.o
 INC += ./inc
 
 CFLAGS += -I$(INC)
