@@ -28,6 +28,7 @@ About Application "GetArch"
 Getarch application reads file content and if its a library then, retreives architecture supported by that lib.
 Getarch reads all files present in "Directory name" passed by user as an argument, user can pass single filename(with absoulte/relative) also.
 
+Note:Symlinks are also checked for libs, and contribute to libcount
 ==================================
 Supported command line Arguments:
 ==================================

@@ -46,22 +46,27 @@ static int print_libs(int is_error)
         dbgprintf("head is null, most probably because no libs were found\n");
         goto exit;
     }
+
+    printf("================\n");
+    printf("printing libs\n");
+    printf("================\n");
     filenames *temp = head;
     if ( temp != current )
     {
         do
         {
             libcount++;
-            printf("%s:           Arch[%s]\n", temp->name, temp->arch);
+            printf("%s:           Arch:[%s]\n", temp->name, temp->arch);
             temp = temp->next;
         } while ( temp != NULL );
     } else {
         libcount++;
-        printf("%s:           Arch[%s]\n", temp->name, temp->arch);
+        printf("%s:           Arch:[%s]\n", temp->name, temp->arch);
     }
 
 exit:
-    printf("Total number of libs found[%d]\n", libcount);
+    printf("================\n");
+    printf("Total number of libs found:[%d]\n", libcount);
     if ( is_error )
         return -1;
     else
